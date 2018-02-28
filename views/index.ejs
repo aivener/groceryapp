@@ -1,0 +1,41 @@
+<ul>
+  <% shoppinglists.forEach(function(shoppinglist) { %>
+    <li>
+      <%= shoppinglist.name %> <a href="/shoppinglists/<%= shoppinglist.id %>/destroy">delete list</a>
+      <form action="/shoppinglists/<%= shoppinglist.id %>/listitems/create" method="post">
+        <fieldset>
+          <legend>Create a new list item</legend>
+          <label>
+            Title:
+            <input name="title" />
+          </label>
+          <label>
+            Description:
+            <input name="description" />
+          </label>
+          <input type="submit" value="Create list item">
+        </fieldset>
+      </form>
+      <ul>
+        <% shoppinglist.ListItems.forEach(function(listitem) { %>
+          <li>
+            <%= listitem.title %>
+            <%= listitem.description %>
+            <a href="/shoppinglists/<%= shoppinglist.id %>/listitems/<%= listitem.id %>/destroy">delete item</a>
+          </li>
+        <% }) %>
+      </ul>
+    </li>
+  <% }) %>
+</ul>
+
+<form action="/shoppinglists/create" method="post">
+	<fieldset>
+    <legend>Create a new list</legend>
+    <label>
+      List Name:
+      <input type="string" name="name">
+      <input type="submit" value="Create list">
+    </label>
+	</fieldset>
+</form>
